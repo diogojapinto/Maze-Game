@@ -3,7 +3,7 @@ package maze.test;
 import static org.junit.Assert.*;
 import maze.elems.*;
 import maze.logic.Maze;
-import maze.cli.invalidSize;
+import maze.exceptions.*;
 
 import org.junit.Test;
 
@@ -16,13 +16,13 @@ public class DragonTest {
 	public void DragonSimpleMovement() {
 		int[] default_dragon_pos = { 1, 1};
 		Dragon dragon;
-		Maze maze;
+		MazeBuilder maze;
 		
 		while(true)
 		{
 			try{
 				dragon = new Dragon(default_dragon_pos);
-				maze = new Maze();
+				maze = new MazeBuilder();
 				break;
 			} catch(Exception e){
 			}

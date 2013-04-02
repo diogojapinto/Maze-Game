@@ -1,6 +1,6 @@
 package maze.elems;
 
-import maze.cli.invalidSize;
+import maze.exceptions.*;
 
 // introduzir metodos final
 
@@ -55,6 +55,10 @@ public abstract class GameElem {
 		if (h_pos >= 0)
 			pos[1] = h_pos;
 	}
-
+	
+	/*
+	 * mecanismo usado para saber o estado atual dos elementos de jogo
+	 * seja em modo de texto ou gráfico
+	 */
 	public abstract char getCurrCharacter();
 }

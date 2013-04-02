@@ -1,8 +1,9 @@
 package maze.elems;
 
-import maze.cli.invalidSize;
+import maze.exceptions.*;
 import maze.elems.GameElem;
 import maze.logic.Maze;
+import maze.logic.mazebuilder.*;
 
 public abstract class Mobile extends GameElem {
 
@@ -44,7 +45,7 @@ public abstract class Mobile extends GameElem {
 		} catch (invalidSize e) {
 			System.err.println("Invalid size");
 		}
-		if (maze_elem == Maze.PATH) {
+		if (maze_elem == MazeBuilder.PATH) {
 			pos = next_pos.clone();
 		}
 	}

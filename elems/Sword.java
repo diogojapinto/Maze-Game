@@ -1,13 +1,15 @@
 package maze.elems;
 
-import maze.cli.invalidSize;
+import maze.exceptions.*;
 
 public class Sword extends GameElem {
 
 	private boolean picked_up = false;
 
-	public Sword(int[] pos) throws invalidSize {
-		super(pos);
+	private static int[] default_sword_pos = { 8, 1 };
+
+	public Sword() throws invalidSize {
+		super(default_sword_pos);
 	}
 	/*
 	 * 'getters'
@@ -26,7 +28,7 @@ public class Sword extends GameElem {
 	/*
 	 * a espada foi largada
 	 */
-	public void putDown() {
+	public void putDown(int pos[]) {
 		picked_up = false;
 	}
 

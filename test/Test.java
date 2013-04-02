@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 //import org.junit.Test;
 import maze.elems.*;
 import maze.logic.Maze;
-import maze.cli.invalidSize;
+import maze.exceptions.*;
 
 public class Test {
 
@@ -17,11 +17,11 @@ public class Test {
 	public void testSimpleMovement() {
 		int[] default_hero_pos = { 1, 1 };
 		Hero hero;
-		Maze maze;
+		MazeBuilder maze;
 		while (true) {
 			try {
 				hero = new Hero(default_hero_pos);
-				maze = new Maze();
+				maze = new MazeBuilder();
 				break;
 			} catch (Exception e) {
 			}
@@ -38,7 +38,7 @@ public class Test {
 	public void killHero() {
 		int[] default_hero_pos = { 1, 1 };
 		int[] default_dragon_pos = { 3, 1 };
-		Maze maze;
+		MazeBuilder maze;
 		Hero hero;
 		Dragon dragon;
 
@@ -46,7 +46,7 @@ public class Test {
 			try {
 				hero = new Hero(default_hero_pos);
 				dragon = new Dragon(default_dragon_pos);
-				maze = new Maze();
+				maze = new MazeBuilder();
 				break;
 			} catch (Exception e) {
 			}
@@ -65,13 +65,13 @@ public class Test {
 		int[] default_sword_pos = { 2, 1 };
 		Hero hero;
 		Sword sword;
-		Maze maze;
+		MazeBuilder maze;
 
 		while (true) {
 			try {
 				hero = new Hero(default_hero_pos);
 				sword = new Sword(default_sword_pos);
-				maze = new Maze();
+				maze = new MazeBuilder();
 				break;
 			} catch (Exception e) {
 			}
@@ -88,7 +88,7 @@ public class Test {
 	public void killDragon() {
 		int[] default_hero_pos = { 1, 1 };
 		int[] default_dragon_pos = { 3, 1 };
-		Maze maze;
+		MazeBuilder maze;
 		Hero hero;
 		Dragon dragon;
 
@@ -96,7 +96,7 @@ public class Test {
 			try {
 				hero = new Hero(default_hero_pos);
 				dragon = new Dragon(default_dragon_pos);
-				maze = new Maze();
+				maze = new MazeBuilder();
 				break;
 			} catch (Exception e) {
 			}
@@ -116,13 +116,13 @@ public class Test {
 		int[] default_exit_pos = { 2, 1 };
 		Hero hero;
 		MazeExit exit;
-		Maze maze;
+		MazeBuilder maze;
 
 		while (true) {
 			try {
 				hero = new Hero(default_hero_pos);
 				exit = new MazeExit(default_exit_pos);
-				maze = new Maze();
+				maze = new MazeBuilder();
 				break;
 			} catch (Exception e) {
 			}
@@ -140,7 +140,7 @@ public class Test {
 		int[] default_hero_pos = { 1, 1 };
 		int[] default_dragon_pos = { 3, 1 };
 		int[] default_exit_pos = { 4, 1 };
-		Maze maze;
+		MazeBuilder maze;
 		Hero hero;
 		Dragon dragon;
 		MazeExit exit;
@@ -150,7 +150,7 @@ public class Test {
 				hero = new Hero(default_hero_pos);
 				dragon = new Dragon(default_dragon_pos);
 				exit = new MazeExit(default_exit_pos);
-				maze = new Maze();
+				maze = new MazeBuilder();
 				break;
 			} catch (Exception e) {
 			}

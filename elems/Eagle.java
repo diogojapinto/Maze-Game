@@ -1,6 +1,6 @@
 package maze.elems;
 
-import maze.cli.invalidSize;
+import maze.exceptions.*;
 import maze.logic.Movement;
 
 public class Eagle extends Mobile {
@@ -11,10 +11,6 @@ public class Eagle extends Mobile {
 	private boolean is_with_hero = true;
 	private boolean returning = false;
 	private int[] hero_pos = new int[2];
-
-	// durante o movimento, guarda o numero de casas sequenciais que voou na
-	// mesma direcao
-	private int pos_moved = 0;
 
 	public Eagle(int[] pos) throws invalidSize {
 		super(pos);
@@ -28,9 +24,7 @@ public class Eagle extends Mobile {
 		alive = false;
 		if (this.hasSword()) {
 			has_sword = false;
-			s.setHorizPos(this.getHorizPos());
-			s.setVertPos(this.getVertPos());
-			s.putDown();
+			s.putDown(this.getPos());
 		}
 	}
 

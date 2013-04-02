@@ -1,13 +1,15 @@
 package maze.elems;
 
-import maze.cli.invalidSize;
+import maze.exceptions.*;
 
 public class MazeExit extends GameElem {
 
 	private boolean is_open;
 
-	public MazeExit(int[] pos) throws invalidSize {
-		super(pos);
+	private static int[] default_exit_pos = { 5, 9 };
+
+	public MazeExit() throws invalidSize {
+		super(default_exit_pos);
 		is_open = false;
 	}
 
@@ -20,6 +22,9 @@ public class MazeExit extends GameElem {
 	}
 
 	public char getCurrCharacter() {
+		if (is_open)
 			return 'S';
+		else
+			return ' ';
 	}
 }

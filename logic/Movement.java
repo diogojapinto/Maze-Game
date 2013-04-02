@@ -5,15 +5,22 @@ import maze.elems.Mobile;
 
 public class Movement {
 	static int pos_counter = 0;
+	
+	private static Movement instance = null;
+	
+	public static Movement getInstance() {
+		if (instance == null)
+			instance = new Movement();
+		return instance;
+	}
 
-	@SuppressWarnings("unused")
-	public static void moveRandom(Mobile elem, Maze m) {
+	public void moveRandom(Mobile elem, Maze m) {
 		Random r = new Random();
 		int dir = r.nextInt(4) + 1;
 		elem.move(dir, m);
 	}
 
-	public static int[] moveRect(int delta_x, int delta_y, int x_act,
+	public int[] moveRect(int delta_x, int delta_y, int x_act,
 			int y_act, int x_fin, int y_fin) {
 		int[] new_pos = new int[2];
 		if (x_fin - x_act == 0 && y_fin - y_act == 0) {

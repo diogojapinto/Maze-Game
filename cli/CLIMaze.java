@@ -5,8 +5,8 @@ import java.util.Scanner;
 import maze.elems.GameElem;
 import maze.elems.Hero;
 import maze.elems.Mobile;
-import maze.elems.Sword;
 import maze.logic.Maze;
+import maze.exceptions.*;
 
 public class CLIMaze {
 
@@ -16,25 +16,19 @@ public class CLIMaze {
 	public static final int FIXED_DRAGON = 2;
 	public static final int MOVABLE_DRAGON = 1;
 
-	@SuppressWarnings("unused")
-	private int[] findCharacter(char p, char[][] maze) {
-		int[] res = new int[2];
-		outer_loop: for (int i = 0; i < maze.length; i++) {
-			for (int j = 0; j < maze[i].length; j++) {
-				if (maze[i][j] == p) {
-					res[0] = i;
-					res[1] = j;
-					break outer_loop;
-				}
-			}
-		}
-		return res;
+	private static CLIMaze instance = null;
+
+	public static CLIMaze getInstance() {
+		if (instance == null)
+			instance = new CLIMaze();
+		return instance;
 	}
 
 	/*
 	 * Pergunta ao utilizador qual o labirinto a usar: predefinido ou aleat�rio
 	 */
 	public int askTypeMaze() {
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		int answer;
 		while (true) {
@@ -57,6 +51,7 @@ public class CLIMaze {
 	}
 
 	public boolean askTypeDragon() {
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		int answer;
 		while (true) {
@@ -90,6 +85,7 @@ public class CLIMaze {
 		while (true) {
 			try {
 				System.out.println("Quantos dragoes?");
+				@SuppressWarnings("resource")
 				Scanner s = new Scanner(System.in);
 				nr_dragons = s.nextInt();
 				// dependendo do tamanho do labirinto, permite ate
@@ -114,6 +110,7 @@ public class CLIMaze {
 		System.out.println("(D)Direita");
 		System.out.println("(W)Cima");
 		System.out.println("(L)Enviar aguia");
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		String str = s.nextLine().toUpperCase();
 
@@ -127,13 +124,14 @@ public class CLIMaze {
 		case "W":
 			return (int) Mobile.UP;
 		case "L":
-			return (int) Hero.EAGLE;
+			return (int) Hero.THROW_EAGLE;
 		default:
 			return 0;
 		}
 	}
 
 	public int setMazeSize() {
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		while (true) {
 			try {

@@ -2,8 +2,8 @@ package maze.elems;
 
 import java.util.Random;
 
-import maze.cli.invalidSize;
-import maze.logic.Maze;
+import maze.exceptions.*;
+import maze.logic.mazebuilder.*;
 
 public class Dragon extends Mobile {
 
@@ -12,8 +12,10 @@ public class Dragon extends Mobile {
 	private boolean asleep = false;
 	private boolean movable = true;
 
-	public Dragon(int[] pos) throws invalidSize {
-		super(pos);
+	private static int[] default_dragon_pos = { 3, 1 };
+
+	public Dragon() throws invalidSize {
+		super(default_dragon_pos);
 	}
 
 	/*
@@ -62,7 +64,7 @@ public class Dragon extends Mobile {
 		} else if ((this.getVertPos() != s.getVertPos() || this.getHorizPos() != s
 				.getHorizPos()) && hasSword()) {
 			this.dropSword();
-			s.putDown();
+			s.putDown(s.getPos());
 		}
 	}
 
@@ -84,7 +86,7 @@ public class Dragon extends Mobile {
 		return res;
 	}
 
-	public void move(int dir, Maze maze) {
+	public void move(int dir, MazeBuilder maze) {
 		if (this.isMovable()) {
 			Random r = new Random();
 			int sleep = r.nextInt(3) + 1;
@@ -96,15 +98,15 @@ public class Dragon extends Mobile {
 			}
 		}
 	}
-	
+
 	public void setAsMovable() {
 		movable = true;
 	}
-	
+
 	public void setAsFixed() {
 		movable = false;
 	}
-	
+
 	public boolean isMovable() {
 		return movable;
 	}

@@ -1,18 +1,20 @@
 package maze.elems;
 
-import maze.cli.invalidSize;
-import maze.logic.Maze;
+import maze.exceptions.*;
+import maze.logic.mazebuilder.*;
 
 public class Hero extends Mobile {
 
-	public static final int EAGLE = 5;
+	public static final int THROW_EAGLE = 5;
 
 	private boolean found_exit = false;
 	private boolean has_sword = false;
 	private boolean throwed_eagle = false;
+	
+	private static int[] default_hero_pos = { 1, 1 };
 
-	public Hero(int[] pos) throws invalidSize {
-		super(pos);
+	public Hero() throws invalidSize {
+		super(default_hero_pos);
 	}
 
 	public boolean isAtExit() {
@@ -92,15 +94,15 @@ public class Hero extends Mobile {
 
 	public char getCurrCharacter() {
 		if (!alive)
-			return ' ';
+			return 'K';
 		else if (has_sword)
 			return 'A';
 		else
 			return 'H';
 	}
 
-	public void move(int dir, Maze maze) {
-		if (dir == EAGLE && !this.hasSword()) {
+	public void move(int dir, MazeBuilder maze) {
+		if (dir == THROW_EAGLE && !this.hasSword()) {
 			this.throwEagle();
 		} else
 			super.move(dir, maze);
