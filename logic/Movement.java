@@ -5,14 +5,24 @@ import maze.elems.Mobile;
 
 public class Movement {
 	static int pos_counter = 0;
-	
+
 	private static Movement instance = null;
-	
+
 	public static Movement getInstance() {
 		if (instance == null)
 			instance = new Movement();
 		return instance;
 	}
+
+	// constantes usadas no movimento das personagens
+	// colisões são processadas previamente pelo motor de jogo
+	public static final int UP = 1;
+
+	public static final int LEFT = 2;
+
+	public static final int DOWN = 3;
+
+	public static final int RIGHT = 4;
 
 	public void moveRandom(Mobile elem, Maze m) {
 		Random r = new Random();
@@ -20,8 +30,8 @@ public class Movement {
 		elem.move(dir, m);
 	}
 
-	public int[] moveRect(int delta_x, int delta_y, int x_act,
-			int y_act, int x_fin, int y_fin) {
+	public int[] moveRect(int delta_x, int delta_y, int x_act, int y_act,
+			int x_fin, int y_fin) {
 		int[] new_pos = new int[2];
 		if (x_fin - x_act == 0 && y_fin - y_act == 0) {
 			return new_pos;

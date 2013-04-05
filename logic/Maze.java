@@ -1,5 +1,6 @@
 package maze.logic;
 
+import maze.cli.CLIFunctions;
 import maze.elems.GameElem;
 import maze.elems.MazeExit;
 import maze.exceptions.invalidSize;
@@ -10,7 +11,7 @@ import maze.logic.mazebuilder.RandomBuilder;
 public class Maze {
 	MazeBuilder builder;
 
-	protected char[][] maze;
+	private char[][] maze;
 
 	private static Maze instance = null;
 
@@ -30,9 +31,9 @@ public class Maze {
 
 	public void buildMaze(int maze_size, MazeExit exit, GameElem[] elems) {
 		while (true) {
-			builder.createMaze(maze_size, exit);
+			maze = builder.createMaze(maze_size, exit);
 			try {
-				if (builder.placeElements(maze_size, maze, elems))
+				if (builder.placeElements(maze_size, this, elems))
 					break;
 			} catch (invalidSize e) {
 			}
@@ -40,6 +41,7 @@ public class Maze {
 	}
 
 	public void openExit(MazeExit exit) {
+		exit.Open();
 		maze[exit.getVertPos()][exit.getHorizPos()] = MazeBuilder.PATH;
 	}
 
@@ -65,4 +67,7 @@ public class Maze {
 			return maze[pos[0]][pos[1]];
 	}
 
+	public int getMazeSize() {
+		return maze.length;
+	}
 }

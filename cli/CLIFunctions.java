@@ -1,14 +1,15 @@
 package maze.cli;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import maze.elems.GameElem;
 import maze.elems.Hero;
-import maze.elems.Mobile;
 import maze.logic.Maze;
+import maze.logic.Movement;
 import maze.exceptions.*;
 
-public class CLIMaze {
+public class CLIFunctions {
 
 	public static final int PREDEFINED = 2;
 	public static final int RANDOM = 1;
@@ -16,11 +17,11 @@ public class CLIMaze {
 	public static final int FIXED_DRAGON = 2;
 	public static final int MOVABLE_DRAGON = 1;
 
-	private static CLIMaze instance = null;
+	private static CLIFunctions instance = null;
 
-	public static CLIMaze getInstance() {
+	public static CLIFunctions getInstance() {
 		if (instance == null)
-			instance = new CLIMaze();
+			instance = new CLIFunctions();
 		return instance;
 	}
 
@@ -116,13 +117,13 @@ public class CLIMaze {
 
 		switch (str) {
 		case "A":
-			return (int) Mobile.LEFT;
+			return (int) Movement.LEFT;
 		case "S":
-			return (int) Mobile.DOWN;
+			return (int) Movement.DOWN;
 		case "D":
-			return (int) Mobile.RIGHT;
+			return (int) Movement.RIGHT;
 		case "W":
-			return (int) Mobile.UP;
+			return (int) Movement.UP;
 		case "L":
 			return (int) Hero.THROW_EAGLE;
 		default:
@@ -130,7 +131,7 @@ public class CLIMaze {
 		}
 	}
 
-	public int setMazeSize() {
+	public int askMazeSize() {
 		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		while (true) {
@@ -156,24 +157,20 @@ public class CLIMaze {
 		return true;
 	}
 
-	public void printMaze(Maze maze, GameElem[] elems) {
-		char[][] maze_tmp = maze.getMaze();
-		for (GameElem e : elems) {
-			if (e instanceof Mobile) {
-				if (((Mobile) e).isAlive()) {
-					drawGameElem(e, maze_tmp);
-				}
-			} else {
-				drawGameElem(e, maze_tmp);
-			}
-		}
+	public void printMaze(char[][] maze) {
 		System.out.println();
-		for (char[] s : maze_tmp) {
+		for (char[] s : maze) {
 			for (char c : s) {
 				System.out.print(c);
 				System.out.print(" ");
 			}
 			System.out.println();
+		}
+	}
+
+	public void printStrings(LinkedList<String> strings) {
+		for (String s : strings) {
+			System.out.println(s);
 		}
 	}
 }
