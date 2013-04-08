@@ -97,7 +97,8 @@ public class RandomBuilder extends MazeBuilder {
 						int[] tmp = new int[2];
 						tmp[0] = actual_pos[0];
 						tmp[1] = actual_pos[1] - 1;
-						if (checkWhiteSquare(maze, tmp) && checkDiagSquare(maze, tmp)) {
+						if (checkWhiteSquare(maze, tmp)
+								&& checkDiagSquare(maze, tmp)) {
 							actual_pos[1] = actual_pos[1] - 1;
 							maze[actual_pos[0]][actual_pos[1]] = ' ';
 							paths.push(actual_pos.clone());
@@ -115,7 +116,8 @@ public class RandomBuilder extends MazeBuilder {
 						int[] tmp = new int[2];
 						tmp[0] = actual_pos[0] + 1;
 						tmp[1] = actual_pos[1];
-						if (checkWhiteSquare(maze, tmp) && checkDiagSquare(maze, tmp)) {
+						if (checkWhiteSquare(maze, tmp)
+								&& checkDiagSquare(maze, tmp)) {
 							actual_pos[0] = actual_pos[0] + 1;
 							maze[actual_pos[0]][actual_pos[1]] = ' ';
 							paths.push(actual_pos.clone());
@@ -131,7 +133,8 @@ public class RandomBuilder extends MazeBuilder {
 						int[] tmp = new int[2];
 						tmp[0] = actual_pos[0];
 						tmp[1] = actual_pos[1] + 1;
-						if (checkWhiteSquare(maze, tmp) && checkDiagSquare(maze, tmp)) {
+						if (checkWhiteSquare(maze, tmp)
+								&& checkDiagSquare(maze, tmp)) {
 							actual_pos[1] = actual_pos[1] + 1;
 							maze[actual_pos[0]][actual_pos[1]] = ' ';
 							paths.push(actual_pos.clone());
@@ -148,7 +151,8 @@ public class RandomBuilder extends MazeBuilder {
 						int[] tmp = new int[2];
 						tmp[0] = actual_pos[0] - 1;
 						tmp[1] = actual_pos[1];
-						if (checkWhiteSquare(maze, tmp) && checkDiagSquare(maze, tmp)) {
+						if (checkWhiteSquare(maze, tmp)
+								&& checkDiagSquare(maze, tmp)) {
 							actual_pos[0] = actual_pos[0] - 1;
 							maze[actual_pos[0]][actual_pos[1]] = ' ';
 							paths.push(actual_pos.clone());
@@ -173,7 +177,8 @@ public class RandomBuilder extends MazeBuilder {
 		return maze;
 	}
 
-	public boolean placeElements(int size, char[][] maze, GameElem[] elems) throws invalidSize {
+	public boolean placeElements(int size, Maze maze, GameElem[] elems)
+			throws invalidSize {
 		int n_tries = 200; // numero de tentativas de arranjar uma nova posicao
 		Random r = new Random();
 		for (int counter = 0; counter < elems.length; counter++) {
@@ -184,7 +189,7 @@ public class RandomBuilder extends MazeBuilder {
 				while (true) {
 					elems[counter].setVertPos(r.nextInt(size - 2) + 1);
 					elems[counter].setHorizPos(r.nextInt(size - 2) + 1);
-					if (Maze.getInstance().getPosElem(elems[counter].getPos()) == PATH) {
+					if (maze.getPosElem(elems[counter].getPos()) == PATH) {
 						boolean checked_all = true;
 						// percorre a procura de dragoes
 						for (GameElem d : elems) {
@@ -227,7 +232,7 @@ public class RandomBuilder extends MazeBuilder {
 				while (true) {
 					int i = r.nextInt(size - 1) + 1;
 					int j = r.nextInt(size - 1) + 1;
-					if (maze[i][j] == ' ') {
+					if (maze.getMaze()[i][j] == ' ') {
 						elems[counter].setVertPos(i);
 						elems[counter].setHorizPos(j);
 						break;
@@ -307,7 +312,7 @@ public class RandomBuilder extends MazeBuilder {
 
 	// verificacao final
 	// quadrados 3x3 so com parede
-	private boolean checkWallSquare(char[][] maze ) {
+	private boolean checkWallSquare(char[][] maze) {
 		for (int i = 0; i < maze.length - 2; i++) {
 			for (int j = 0; j < maze[i].length - 2; j++) {
 				if (maze[i][j] == 'X' && maze[i][j + 1] == 'X'

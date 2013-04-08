@@ -1,6 +1,7 @@
 package maze.elems;
 
 import maze.exceptions.*;
+import maze.logic.Maze;
 import maze.logic.mazebuilder.*;
 
 public class Hero extends Mobile {
@@ -10,7 +11,7 @@ public class Hero extends Mobile {
 	private boolean found_exit = false;
 	private boolean has_sword = false;
 	private boolean throwed_eagle = false;
-	
+
 	private static int[] default_hero_pos = { 1, 1 };
 
 	public Hero() throws invalidSize {
@@ -42,9 +43,9 @@ public class Hero extends Mobile {
 	/*
 	 * verifica se o heroi e o dragao se confrontaram
 	 */
-	public void checkConfrontation(Dragon d) {
+	public boolean checkConfrontation(Dragon d) {
 		if (!d.isAlive())
-			return;
+			return false;
 
 		if ((getVertPos() == d.getVertPos() - 1 && getHorizPos() == d
 				.getHorizPos())
@@ -56,14 +57,17 @@ public class Hero extends Mobile {
 						.getVertPos())) {
 			if (!d.isAsleep() && !this.hasSword()) {
 				this.die();
+				return false;
 			}
 			if (has_sword) {
 				d.die();
+				return true;
 			}
 
 			// caso o dragao estiver a dormir e o heroi nao tiver a espada, nada
 			// acontece
 		}
+		return false;
 	}
 
 	public boolean reachedSword(Sword s) {
@@ -80,16 +84,19 @@ public class Hero extends Mobile {
 		return false;
 	}
 
-	public void reachedExit(MazeExit exit) {
+	public boolean reachedExit(MazeExit exit) {
 		if (!isAlive())
-			return;
+			return false;
 
 		if (getVertPos() == exit.getVertPos()
 				&& getHorizPos() == exit.getHorizPos()) {
 
-			if (has_sword)
+			if (has_sword) {
 				this.foundExit();
+				return true;
+			}
 		}
+		return false;
 	}
 
 	public char getCurrCharacter() {
@@ -101,11 +108,12 @@ public class Hero extends Mobile {
 			return 'H';
 	}
 
-	public void move(int dir, MazeBuilder maze) {
+	public boolean move(int dir, Maze maze) {
 		if (dir == THROW_EAGLE && !this.hasSword()) {
 			this.throwEagle();
+			return true;
 		} else
-			super.move(dir, maze);
+			return super.move(dir, maze);
 	}
 
 	public boolean isEagleThrown() {

@@ -11,6 +11,7 @@ public class Sword extends GameElem {
 	public Sword() throws invalidSize {
 		super(default_sword_pos);
 	}
+
 	/*
 	 * 'getters'
 	 */
@@ -29,6 +30,8 @@ public class Sword extends GameElem {
 	 * a espada foi largada
 	 */
 	public void putDown(int pos[]) {
+		this.setHorizPos(pos[1]);
+		this.setVertPos(pos[0]);
 		picked_up = false;
 	}
 

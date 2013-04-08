@@ -42,9 +42,9 @@ public class Eagle extends Mobile {
 	/*
 	 * verifica confronto entre a aguia e um dragao
 	 */
-	public void checkConfrontation(Dragon d, Sword s) {
+	public boolean checkConfrontation(Dragon d, Sword s) {
 		if (!d.isAlive())
-			return;
+			return false;
 
 		if ((getVertPos() == d.getVertPos() - 1 && getHorizPos() == d
 				.getHorizPos())
@@ -56,11 +56,10 @@ public class Eagle extends Mobile {
 						.getVertPos())) {
 			if (!d.isAsleep() && !this.isFlying() && !this.isWithHero()) {
 				this.die(s);
+				return true;
 			}
-
-			// caso o dragao estiver a dormir e o heroi nao tiver a espada, nada
-			// acontece
 		}
+		return false;
 	}
 
 	/*
@@ -75,7 +74,8 @@ public class Eagle extends Mobile {
 			returning = false;
 			return;
 		} else if (!returning) {
-			int[] inc_pos = Movement.moveRect(hero_pos[0] - s.getVertPos(),
+			int[] inc_pos = Movement.getInstance().moveRect(
+					hero_pos[0] - s.getVertPos(),
 					hero_pos[1] - s.getHorizPos(), this.getVertPos(),
 					this.getHorizPos(), s.getVertPos(), s.getHorizPos());
 
@@ -95,9 +95,10 @@ public class Eagle extends Mobile {
 		if (returning && has_sword) {
 		}
 		flying = true;
-		int[] inc_pos = Movement.moveRect(s.getVertPos() - hero_pos[0],
-				s.getHorizPos() - hero_pos[1], this.getVertPos(),
-				this.getHorizPos(), hero_pos[0], hero_pos[1]);
+		int[] inc_pos = Movement.getInstance()
+				.moveRect(s.getVertPos() - hero_pos[0],
+						s.getHorizPos() - hero_pos[1], this.getVertPos(),
+						this.getHorizPos(), hero_pos[0], hero_pos[1]);
 
 		this.setVertPos(inc_pos[0] + this.getVertPos());
 		this.setHorizPos(inc_pos[1] + this.getHorizPos());

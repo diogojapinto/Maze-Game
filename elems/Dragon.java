@@ -3,6 +3,7 @@ package maze.elems;
 import java.util.Random;
 
 import maze.exceptions.*;
+import maze.logic.Maze;
 import maze.logic.mazebuilder.*;
 
 public class Dragon extends Mobile {
@@ -86,17 +87,19 @@ public class Dragon extends Mobile {
 		return res;
 	}
 
-	public void move(int dir, MazeBuilder maze) {
+	public boolean move(int dir, Maze maze) {
 		if (this.isMovable()) {
 			Random r = new Random();
 			int sleep = r.nextInt(3) + 1;
 			if (sleep == 3) {
 				this.sleep();
+				return false;
 			} else {
 				this.wakeUp();
-				super.move(dir, maze);
+				return super.move(dir, maze);
 			}
 		}
+		return false;
 	}
 
 	public void setAsMovable() {

@@ -1,9 +1,9 @@
 package maze.logic.mazebuilder;
 
-
 import maze.exceptions.*;
 import maze.elems.GameElem;
 import maze.elems.MazeExit;
+import maze.logic.Maze;
 
 public abstract class MazeBuilder {
 	public static final char WALL = 'X';
@@ -16,7 +16,7 @@ public abstract class MazeBuilder {
 	 * Coloca os elementos recebidos num array. Parte do pressuposto de que o
 	 * heroi e' o ultimo elemento
 	 */
-	public abstract boolean placeElements(int size,  char[][] maze,GameElem[] elems) throws invalidSize;
+	public abstract boolean placeElements(int size, Maze maze, GameElem[] elems)
+			throws invalidSize;
 
-	
 }
