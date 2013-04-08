@@ -14,6 +14,14 @@ import maze.exceptions.invalidSize;
 
 public class Game implements Serializable {
 
+<<<<<<< HEAD
+=======
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+>>>>>>> 029a2eee0c99b6c87f7706c0c8a0291120e62d04
 	// conjunto de mensagens predefinidas
 	private final String mess_killed_dragon = "You slayed a dragon!";
 	private final String mess_killed_hero = "You were killed!";
@@ -41,12 +49,15 @@ public class Game implements Serializable {
 
 	protected Maze maze;
 
+<<<<<<< HEAD
 	private NextMazeDefinitions next_definitions;
 
 	public Game() {
 		next_definitions = new NextMazeDefinitions();
 	}
 
+=======
+>>>>>>> 029a2eee0c99b6c87f7706c0c8a0291120e62d04
 	public boolean initializeMain() {
 
 		try {
@@ -208,6 +219,7 @@ public class Game implements Serializable {
 			// if (!hero.isAlive())
 			return mess_killed_hero;
 	}
+<<<<<<< HEAD
 
 	public void newGame() {
 		initializeMain();
@@ -256,4 +268,6 @@ public class Game implements Serializable {
 	public static int getMaxNrDragons(int i) {
 		return (int) Math.pow((i / 5), 2.0);
 	}
+=======
+>>>>>>> 029a2eee0c99b6c87f7706c0c8a0291120e62d04
 }
